@@ -1,0 +1,30 @@
+{
+    "name": "hardykay/simple-rest-api",
+    "description": "thinkPHP restful api",
+    "type": "library",
+    "keywords": ["thinkPHP", "restful", "api", "form"],
+    "homepage": "https://github.com/hardykay/thinkRestfulApi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hardy Kay",
+            "email": "hardykay@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6.0",
+        "topthink/framework": ">=5.0"
+    },
+    "require-dev": {
+        "topthink/framework": ">=5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hardy\\http\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
