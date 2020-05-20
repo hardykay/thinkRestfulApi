@@ -10,6 +10,10 @@ use hardy\http\session\TokenCache;
 
 class RestBase  extends AuthSession
 {
+    // 分页数据
+    protected $count = 0;
+    protected $size = 0;
+    protected $page = 0;
     // 允许请求方法类型
     protected $methods = ['get', 'post', 'put', 'delete'];
 
@@ -171,22 +175,15 @@ class RestBase  extends AuthSession
      * 成功
      * @param array $data
      * @param string $message
-     * @param int $count
-     * @param int $page_number
-     * @param int $page
      */
-    public function success($data=[], $count=0, $page_number=0, $page=0, $message='success'){
-        if ($count !== 0 || $page_number !== 0 ){
-            //总数
-            $jsonData['count'] = $count;
-            //分页数
-            $jsonData['size'] = $page_number;
-            if ($page == 0){
-                $jsonData['page'] = input('page', 1);
-            } else {
-                $jsonData['page'] = $page;
-            }
-
+    public function success($data=[], $message='success'){
+        if ($this->count !== 0 || $this->size !== 0 ){
+            // 总数
+            $jsonData['count'] = $this->count;
+            // 分页数
+            $jsonData['size'] = $this->size;
+            // 页码
+            $jsonData['page'] = $this->page;
             //当前记录列表
             if(empty($data)){
                 $jsonData['list'] = [];
