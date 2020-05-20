@@ -1,5 +1,5 @@
 {
-    "name": "hardy-kay/think-restful-api",
+    "name": "hardy/think-restful-api",
     "description": "thinkPHP restful api",
     "type": "library",
     "keywords": ["thinkPHP", "restful", "api", "form"],
