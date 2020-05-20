@@ -75,6 +75,7 @@ class RestBase  extends AuthSession
         $this->method = $method;
         $this->getVersion();
         $this->route();
+        exit();
         //匹配
     }
     /**
@@ -86,16 +87,18 @@ class RestBase  extends AuthSession
             $arr = explode(',', $func);
             // 设置默认的方法，默认的方法是只有字母数字下划线组成的函数
             foreach ($arr as $item){
-                if (preg_match('/^\w?$/',$item)){
+                if (preg_match('/^[0-9a-zA-Z_]{1,}$/',$item)){
                     $func = $item;
+                    break;
                 }
             }
             // 获取目标函数
             $data = input($this->method.'.');
             $keys = array_keys($data);
+
             foreach ($arr as $item){
                 // 不存在参数则继续
-                if (preg_match('/^\w?$/',$item)){
+                if (preg_match('/^[0-9a-zA-Z_]{1,}$/',$item)){
                     continue;
                 }
                 // 不存在"/"继续
@@ -107,14 +110,14 @@ class RestBase  extends AuthSession
                     continue;
                 }
                 // 以“:”分开每一个参数
-                $params = explode(':', $item);
+                $params = explode(':', $route[1]);
                 if (count($params) == 0){
                     continue;
                 }
                 $flag = 0;
                 foreach ($params as $v){
-                    // if (in_array($v, $keys) && $data[$v] !== ''){
-                    if (in_array($v, $keys)){
+                    if (in_array($v, $keys) && $data[$v] !== ''){
+//                    if (in_array($v, $keys)){
                         $flag++;
                     }
                 }
@@ -141,11 +144,10 @@ class RestBase  extends AuthSession
     {
         $method = $this->getMethodFunc();
         if(method_exists($this, $method)){
-            if(!empty($this->noAuthorization) || !in_array($method, $this->noAuthorization)){
+            if(empty($this->noAuthorization) || !in_array($method, $this->noAuthorization)){
                 $this->auth();
             }
             $this->$method();
-            exit();
         } else {
             throw new \RuntimeException('未定义的方法名:' . $method);
         }
