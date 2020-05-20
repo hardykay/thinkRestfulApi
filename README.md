@@ -8,7 +8,7 @@ git restful api php
 
 ## 安装
 ```php               
-composer require hardy-kay/think-restful-api
+composer require hardy/think-restful-api
 ```
 ## 版权信息
 
