@@ -1,5 +1,5 @@
 {
-    "name": "hardykay/simple-rest-api",
+    "name": "hardy-kay/think-restful-api",
     "description": "thinkPHP restful api",
     "type": "library",
     "keywords": ["thinkPHP", "restful", "api", "form"],
@@ -22,9 +22,6 @@
     "autoload": {
         "psr-4": {
             "hardy\\http\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     }
 }
